@@ -155,27 +155,30 @@ if __name__ == '__main__':
     poseNetTrainer.addManagedData({'train_data_x1': train_data2, 'train_data_x2': train_data4})
     poseNetTrainer.compileFunctions()
 
+    # ###################################################################
+    # # TRAIN
+    # train_res = poseNetTrainer.train(n_epochs=100, storeFilters=True)
+    # train_costs = train_res[0]
+    # wvals = train_res[1]
+    # val_errs = train_res[2]
+    #
+    # # plot cost
+    # fig = plt.figure()
+    # plt.semilogy(train_costs)
+    # plt.show(block=False)
+    # fig.savefig('./eval/'+eval_prefix+'/'+eval_prefix+'_cost.png')
+    #
+    # fig = plt.figure()
+    # plt.semilogy(val_errs)
+    # plt.show(block=False)
+    # fig.savefig('./eval/'+eval_prefix+'/'+eval_prefix+'_errs.png')
+    #
+    # # save results
+    # poseNet.save("./eval/{}/net_{}.pkl".format(eval_prefix, eval_prefix))
+
     ###################################################################
-    # TRAIN
-    train_res = poseNetTrainer.train(n_epochs=100, storeFilters=True)
-    train_costs = train_res[0]
-    wvals = train_res[1]
-    val_errs = train_res[2]
-
-    # plot cost
-    fig = plt.figure()
-    plt.semilogy(train_costs)
-    plt.show(block=False)
-    fig.savefig('./eval/'+eval_prefix+'/'+eval_prefix+'_cost.png')
-
-    fig = plt.figure()
-    plt.semilogy(val_errs)
-    plt.show(block=False)
-    fig.savefig('./eval/'+eval_prefix+'/'+eval_prefix+'_errs.png')
-
-    # save results
-    poseNet.save("./eval/{}/net_{}.pkl".format(eval_prefix, eval_prefix))
-    # poseNet.load("./eval/{}/net_{}.pkl".format(eval_prefix,eval_prefix))
+    # load pre-trained model
+    poseNet.load("./eval/{}/net_{}.pkl".format(eval_prefix,eval_prefix))
 
     ####################################################
     # TEST
